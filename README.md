@@ -1,4 +1,3 @@
-# umaxica-app-jit-asset
+# Umaxica QA
+（ ＾ν＾） Hello, World!
 
-# memo
-- you could see this products are on `asset.jp.umaxica.net`.
