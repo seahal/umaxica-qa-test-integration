@@ -1,18 +1,26 @@
 import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.goto('https://umaxica.net/');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  // Expect the title to contain "UMAXICA".
+  await expect(page).toHaveTitle(/UMAXICA/);
 });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('about page has UMAXICA', async ({ page }) => {
+  await page.goto('https://umaxica.net/about');
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  await expect(page.getByText('About this site.')).toBeVisible();
+});
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+test('top page footer has copyright', async ({ page }) => {
+  await page.goto('https://umaxica.net/');
+
+  await expect(page.locator('footer').getByText('© 2026 UMAXICA')).toBeVisible();
+});
+
+test('about page footer has copyright', async ({ page }) => {
+  await page.goto('https://umaxica.net/about');
+
+  await expect(page.locator('footer').getByText('© 2026 UMAXICA')).toBeVisible();
 });

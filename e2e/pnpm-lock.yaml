@@ -7,12 +7,17 @@ settings:
 importers:
 
   .:
-    dependencies:
-      playwright:
+    devDependencies:
+      '@playwright/test':
         specifier: ^1.56.1
         version: 1.58.2
 
 packages:
+
+  '@playwright/test@1.58.2':
+    resolution: {integrity: sha512-akea+6bHYBBfA9uQqSYmlJXn61cTa+jbO87xVLCWbTqbWadRVmhxlXATaOjOgcBaWU4ePo0wB41KMFv3o35IXA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   fsevents@2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
@@ -30,6 +35,10 @@ packages:
     hasBin: true
 
 snapshots:
+
+  '@playwright/test@1.58.2':
+    dependencies:
+      playwright: 1.58.2
 
   fsevents@2.3.2:
     optional: true
