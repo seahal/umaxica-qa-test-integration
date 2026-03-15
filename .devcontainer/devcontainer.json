@@ -1,0 +1,22 @@
+{
+  "name": "pnpm-k6-dev",
+  "dockerComposeFile": [
+    "docker-compose.yml"
+  ],
+  "service": "devcontainer",
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspaces",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "features": {},
+  "containerEnv": {
+  },
+  "postCreateCommand": "pnpm --version"
+}
