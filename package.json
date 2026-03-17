@@ -1,0 +1,13 @@
+{
+  "name": "umaxica-qa-test-integration",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "vp check",
+    "format": "vp fmt --write",
+    "format:check": "vp fmt",
+    "lint": "vp lint",
+    "lint:fix": "vp lint --fix"
+  },
+  "packageManager": "pnpm@10.27.0"
+}

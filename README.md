@@ -1,27 +1,25 @@
 # Umaxica QA
-（ ＾ν＾） Hello, World!
 
-## 開発環境
+umaxica.com の QA テスト統合リポジトリ。
 
-このプロジェクトはDev Containerを使用します。VS Codeで開くと、自動的にコンテナ内で開発できます。
+## テスト種別
 
-### 含まれるツール
+| ディレクトリ | ツール | 用途 |
+|---|---|---|
+| `e2e/` | Playwright | E2E ブラウザテスト |
+| `bruno/` | Bruno | API テスト |
 
-- pnpm (最新版)
-- k6 (負荷テストツール)
-
-### 使い方
-
-1. VS Codeでこのリポジトリを開く
-2. "Reopen in Container"を選択
-3. コンテナが起動したら、以下のコマンドでk6テストを実行:
+## E2E テスト (Playwright)
 
 ```bash
-k6 run test/sample.test.js
+cd e2e
+pnpm install
+npx playwright test
 ```
 
-または、pnpmを使ってTypeScriptファイルを実行:
+## Lint & Format
 
 ```bash
-pnpm run index.ts
+pnpm install
+pnpm run check
 ```

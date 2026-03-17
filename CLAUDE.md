@@ -4,41 +4,35 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Umaxica QA — a QA/test integration project for umaxica.com. Contains load tests (k6), browser tests (Playwright), and a minimal Hono-based Cloudflare Workers app. Development uses Dev Containers with pnpm and k6 pre-installed.
+Umaxica QA — a QA/test integration project for umaxica.com. Contains E2E browser tests (Playwright) and API tests (Bruno).
 
 ## Architecture
 
-- **`src/index.ts`** — Hono web app targeting Cloudflare Workers
-- **`load_test/`** — k6 load test scripts (`script.js`, `two.js`, `three.js`) that hit `https://umaxica.com/`. Has its own `compose.yml` using `grafana/k6:master-with-browser` image
-- **`browser/`** — Playwright browser tests (`example.spec.ts`), separate pnpm project with its own `package.json`
-- **`Dockerfile` + `compose.yml`** — Dev container setup (Node LTS, pnpm, k6)
-- **`.github/workflows/terraform.yml`** — Terraform CI/CD (init/plan on PR, apply on push to main)
+- **`e2e/`** — Playwright E2E browser tests (`example.spec.ts`), separate pnpm project with its own `package.json`
+- **`bruno/`** — Bruno API tests (placeholder)
 
 ## Commands
 
-### Load tests (k6)
-```bash
-# Run from load_test/ directory or use the k6 docker image
-k6 run load_test/script.js
-k6 run load_test/two.js
-k6 run load_test/three.js
-```
+### E2E tests (Playwright)
 
-### Browser tests (Playwright)
 ```bash
-cd browser
+cd e2e
 pnpm install
 npx playwright test
 ```
 
-### Run TypeScript files
+### Lint & format (via Vite+ / vp)
+
 ```bash
-pnpm run index.ts
+pnpm run check        # vp check (fmt + lint)
+pnpm run format       # vp fmt --write
+pnpm run lint         # vp lint
+pnpm run lint:fix     # vp lint --fix
 ```
 
 ## Key Details
 
 - TypeScript config uses ESNext target, bundler module resolution, strict mode, `noEmit: true`
-- The `browser/` directory is a standalone pnpm project (not a workspace member)
-- k6 test scripts use `https://jslib.k6.io/k6-testing/0.5.0/index.js` for assertions
-- Load test default: 1 VU, 30s duration
+- The `e2e/` directory is a standalone pnpm project (not a workspace member)
+- Root `package.json` uses Vite+ (`vp`) for linting and formatting (oxlint/oxfmt built-in)
+- Vite+ requires the `vp` CLI installed system-wide (`curl -fsSL https://vite.plus | bash`)
