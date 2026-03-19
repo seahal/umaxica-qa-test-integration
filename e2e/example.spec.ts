@@ -46,3 +46,96 @@ test("www.umaxica.dev exists", async ({ page }) => {
 
   expect(response?.status()).toBeLessThan(400);
 });
+
+// Health check tests — apex domains
+for (const domain of ["umaxica.com", "umaxica.org", "umaxica.app", "umaxica.net"]) {
+  test(`${domain} /health returns ok`, async ({ page }) => {
+    const response = await page.goto(`https://${domain}/health`);
+
+    expect(response?.status()).toBe(200);
+  });
+}
+
+// Health check tests — core subdomain apps
+for (const domain of ["jp.umaxica.com", "jp.umaxica.org", "jp.umaxica.app", "www.umaxica.dev"]) {
+  test(`${domain} /health returns ok`, async ({ page }) => {
+    const response = await page.goto(`https://${domain}/health`);
+
+    expect(response?.status()).toBe(200);
+  });
+}
+
+// umaxica.net page content tests
+test("umaxica.net homepage renders content", async ({ page }) => {
+  await page.goto("https://umaxica.net/");
+
+  await expect(page).toHaveTitle(/UMAXICA/);
+  await expect(page.locator("body")).not.toBeEmpty();
+});
+
+test("umaxica.net about page renders content", async ({ page }) => {
+  await page.goto("https://umaxica.net/about");
+
+  await expect(page.getByText("About this site.")).toBeVisible();
+});
+
+// jp.umaxica.app route tests (Timeline/Social Feed App)
+for (const route of [
+  { path: "/", name: "Home/Timeline" },
+  { path: "/configuration/", name: "Configuration" },
+  { path: "/configuration/account", name: "Account settings" },
+  { path: "/configuration/preference", name: "Preference settings" },
+  { path: "/message/", name: "Messages" },
+  { path: "/notification/", name: "Notifications" },
+  { path: "/explore/", name: "Explore" },
+  { path: "/authentication/", name: "Authentication" },
+]) {
+  test(`jp.umaxica.app ${route.name} page loads`, async ({ page }) => {
+    const response = await page.goto(`https://jp.umaxica.app${route.path}`);
+
+    expect(response?.status()).toBeLessThan(400);
+    await expect(page.locator("body")).not.toBeEmpty();
+  });
+}
+
+// jp.umaxica.com route tests (Corporate Site)
+for (const route of [
+  { path: "/", name: "Homepage" },
+  { path: "/explore/", name: "Explore" },
+]) {
+  test(`jp.umaxica.com ${route.name} page loads`, async ({ page }) => {
+    const response = await page.goto(`https://jp.umaxica.com${route.path}`);
+
+    expect(response?.status()).toBeLessThan(400);
+    await expect(page.locator("body")).not.toBeEmpty();
+  });
+}
+
+// jp.umaxica.org route tests (Community/Events Site)
+for (const route of [
+  { path: "/", name: "EventList" },
+  { path: "/configure", name: "Configuration" },
+  { path: "/sample", name: "Sample" },
+]) {
+  test(`jp.umaxica.org ${route.name} page loads`, async ({ page }) => {
+    const response = await page.goto(`https://jp.umaxica.org${route.path}`);
+
+    expect(response?.status()).toBeLessThan(400);
+    await expect(page.locator("body")).not.toBeEmpty();
+  });
+}
+
+test("jp.umaxica.org returns 404 for non-existent route", async ({ page }) => {
+  const response = await page.goto("https://jp.umaxica.org/this-route-does-not-exist");
+
+  expect(response?.status()).toBe(404);
+});
+
+// www.umaxica.dev route tests (Dev/Docs Site)
+test("www.umaxica.dev docs page loads", async ({ page }) => {
+  const response = await page.goto("https://www.umaxica.dev/");
+
+  expect(response?.status()).toBeLessThan(400);
+  await expect(page.locator("body")).not.toBeEmpty();
+});
+
