@@ -78,7 +78,8 @@ pnpm run lint:fix       # oxlint --fix .
 
 ## CI
 
-`.github/workflows/ci.yml` が PR / main・develop への push / 手動実行 (`workflow_dispatch`) で走る。定期実行はしない（本番サイトの死活監視は別ツールに委ねる）。
+`.github/workflows/ci.yml` が PR / `main` への push / 手動実行 (`workflow_dispatch`) で走る。
+定期実行はしない（本番サイトの死活監視は別ツールに委ねる）。
 
 - `lint` — `pnpm run check`（oxfmt + oxlint）
 - `e2e` — `pnpm run test:public` のみ（service token を CI に置かないため）

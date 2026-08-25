@@ -41,3 +41,8 @@ pnpm run lint:fix     # oxlint --fix .
 - Lint/format config lives in `.oxlintrc.json` / `.oxfmtrc.json`
 - E2E tests are split in two: `e2e/public.spec.ts` (no auth, runs in CI, asserts reachability + that Cloudflare Access protection is in place) and `e2e/authenticated.spec.ts` (needs a service token, skips entirely without `CF_ACCESS_CLIENT_ID` / `CF_ACCESS_CLIENT_SECRET`)
 - Access service tokens are deliberately NOT stored in GitHub Secrets — never add them to a workflow
+
+## Branching
+
+- `main` only. Cut a short-lived topic branch off `main`, open a PR, merge when CI is green.
+- There is no long-lived `develop` branch; the repo auto-deletes branches on merge.
