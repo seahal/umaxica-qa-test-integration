@@ -1,0 +1,19 @@
+{
+  "name": "umaxica-qa-e2e",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:public": "playwright test public.spec.ts",
+    "test:auth": "playwright test authenticated.spec.ts",
+    "test:ui": "playwright test --ui",
+    "install-browsers": "playwright install --with-deps chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.58.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.27.0"
+}
