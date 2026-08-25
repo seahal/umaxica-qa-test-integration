@@ -1,0 +1,15 @@
+services:
+  playwright:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    ipc: host
+    volumes:
+      # テストコードをマウント（編集がすぐ反映される）
+      - .:/e2e
+      # node_modules はコンテナ側を使う（ホストと混ざらない）
+      - /e2e/node_modules
+    environment:
+      - CI=true
+    command: ["pnpm", "exec", "playwright", "test"]
