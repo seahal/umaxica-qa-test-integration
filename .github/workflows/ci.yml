@@ -52,10 +52,10 @@ jobs:
 
       - run: pnpm exec playwright install --with-deps chromium
 
-      - run: pnpm exec playwright test
-        env:
-          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
-          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+      # Cloudflare Access の service token は CI に置かない方針のため、
+      # 認証不要な public スイートのみを回す。
+      # authenticated.spec.ts はローカルで token を渡して手動実行する。
+      - run: pnpm run test:public
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

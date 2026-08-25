@@ -1,9 +1,14 @@
 import { test, expect, type Page } from "@playwright/test";
 
-// 対象サイトは全て Cloudflare Access の背後にある。
+// Cloudflare Access の内側でしか検証できないテスト。
+//
 // service token が無いと全リクエストが Access のログイン画面 (HTTP 200) に差し替わり、
-// 「status < 400」「body が空でない」といった検査が偽陽性で通ってしまう。
-// そのため token 未設定時はスイート全体をスキップする。
+// 「status < 400」「body が空でない」といった検査が偽陽性で通ってしまうため、
+// token 未設定時はスイート全体をスキップする。
+//
+// service token は CI (GitHub Secrets) には置かない方針。ローカルで
+//   CF_ACCESS_CLIENT_ID=... CF_ACCESS_CLIENT_SECRET=... pnpm test
+// として手動実行する。CI が常時回すのは public.spec.ts の方。
 const hasAccessToken = Boolean(
   process.env.CF_ACCESS_CLIENT_ID && process.env.CF_ACCESS_CLIENT_SECRET,
 );

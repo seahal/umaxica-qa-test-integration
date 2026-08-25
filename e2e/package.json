@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "playwright test",
+    "test:public": "playwright test public.spec.ts",
+    "test:auth": "playwright test authenticated.spec.ts",
     "test:ui": "playwright test --ui",
     "install-browsers": "playwright install --with-deps chromium"
   },
