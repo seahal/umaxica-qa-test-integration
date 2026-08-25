@@ -5,12 +5,12 @@
 The repository has two separate tool contexts:
 
 - Root commands are for formatting and linting only:
-  - `pnpm run check` — runs `vp check`
-  - `pnpm run format` — runs `vp fmt --write`
-  - `pnpm run format:check` — runs `vp fmt`
-  - `pnpm run lint` — runs `vp lint`
-  - `pnpm run lint:fix` — runs `vp lint --fix`
-- The root formatting/linting commands depend on the `vp` CLI being installed system-wide.
+  - `pnpm run check` — runs `format:check` + `lint`
+  - `pnpm run format` — runs `oxfmt .`
+  - `pnpm run format:check` — runs `oxfmt --check .`
+  - `pnpm run lint` — runs `oxlint .`
+  - `pnpm run lint:fix` — runs `oxlint --fix .`
+- Formatting/linting needs no system-wide CLI: oxlint/oxfmt are root devDependencies installed by `pnpm install`.
 
 - Browser tests live in the standalone `e2e/` project:
   - `cd e2e && pnpm install`
@@ -22,7 +22,7 @@ The repository has two separate tool contexts:
 
 This repository is a QA/test integration repo for `umaxica.com`; it is not an application source tree.
 
-- The root project is a minimal TypeScript/Vite+ shell used for repository-wide formatting and linting. `package.json`, `tsconfig.json`, and `vite.config.ts` exist mainly to support that tooling.
+- The root project is a minimal TypeScript shell used for repository-wide formatting and linting. `package.json` and `tsconfig.json` exist mainly to support that tooling.
 - `e2e/` is a separate pnpm project with its own `package.json`, lockfile, and Playwright config. Treat it as an independent test package rather than a workspace member.
 - Playwright is configured with `testDir: "."` and `testMatch: "**/*.spec.ts"`, so specs are expected directly inside `e2e/` unless that config changes.
 - The current E2E suite exercises live external sites and domains such as `umaxica.net`, `umaxica.com`, `umaxica.org`, `umaxica.app`, and `www.umaxica.dev`. Tests validate page titles, visible text, redirects, and HTTP status responses.

@@ -4,10 +4,10 @@ umaxica.com の QA テスト統合リポジトリ。本番公開サイトに対�
 
 ## テスト種別
 
-| ディレクトリ | ツール | 用途 | 状態 |
-|---|---|---|---|
-| `e2e/` | Playwright | E2E ブラウザテスト | 稼働中 |
-| `bruno/` | Bruno | API テスト | 未実装（プレースホルダー） |
+| ディレクトリ | ツール     | 用途               | 状態                       |
+| ------------ | ---------- | ------------------ | -------------------------- |
+| `e2e/`       | Playwright | E2E ブラウザテスト | 稼働中                     |
+| `bruno/`     | Bruno      | API テスト         | 未実装（プレースホルダー） |
 
 ## 必要環境
 
@@ -38,15 +38,17 @@ docker compose run --rm playwright
 
 ## Lint & Format
 
-ルートは [Vite+](https://vite.plus)（`vp` CLI、oxlint/oxfmt 内蔵）を使う。`pnpm install` では入らないため、
-システムに一度インストールする:
+oxlint / oxfmt をルートの devDependencies として持つ。システムワイドな CLI は不要で、
+`pnpm install` だけで再現できる。
 
 ```bash
-curl -fsSL https://vite.plus | bash   # vp CLI（システムワイド）
-pnpm run check                        # vp check (fmt + lint)
+pnpm install --frozen-lockfile
+pnpm run check          # format:check + lint
+pnpm run format         # oxfmt . （書き換え）
+pnpm run lint:fix       # oxlint --fix .
 ```
 
-`vp` が未インストールでも E2E テストの実行には影響しない。
+設定は `.oxfmtrc.json` / `.oxlintrc.json`。
 
 ## CI
 

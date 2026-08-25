@@ -123,7 +123,7 @@ for (const route of [
 
     expect(response?.status()).toBeLessThan(400);
     await expectNotAccessLogin(page);
-  await expect(page.locator("body")).not.toBeEmpty();
+    await expect(page.locator("body")).not.toBeEmpty();
   });
 }
 
@@ -137,7 +137,7 @@ for (const route of [
 
     expect(response?.status()).toBeLessThan(400);
     await expectNotAccessLogin(page);
-  await expect(page.locator("body")).not.toBeEmpty();
+    await expect(page.locator("body")).not.toBeEmpty();
   });
 }
 
@@ -152,7 +152,7 @@ for (const route of [
 
     expect(response?.status()).toBeLessThan(400);
     await expectNotAccessLogin(page);
-  await expect(page.locator("body")).not.toBeEmpty();
+    await expect(page.locator("body")).not.toBeEmpty();
   });
 }
 
@@ -171,4 +171,3 @@ test.fixme("www.umaxica.dev docs page loads", async ({ page }) => {
   await expectNotAccessLogin(page);
   await expect(page.locator("body")).not.toBeEmpty();
 });
-

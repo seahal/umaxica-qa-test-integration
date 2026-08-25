@@ -10,8 +10,8 @@
   "devDependencies": {
     "@playwright/test": "1.58.2"
   },
-  "packageManager": "pnpm@10.27.0",
   "engines": {
     "node": ">=20"
-  }
+  },
+  "packageManager": "pnpm@10.27.0"
 }
